@@ -5,12 +5,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class LeadModel extends Model {
 
-    protected $table = 'lead';
-
+	protected $fillable = ['id', 'lead_id', 'client_id', 'inspection_type', 'vehicle_id', 'registration_type', 'registration_number', 'loan_agreement_number', 'model_number', 'engine_number', 'chassis_number', 'number_of_owners', 'registration_status', 'mfg_date', 'reg_date', 'status_id', 'customer_id', 'executive_id', 'created_at', 'updated_at'];
+	
     public $rules = [
-	    	'client_name' => 'required',
-	    	'client_state' => 'required',
-	    	'client_city' => 'required',
+	    	'clientName' => 'required',
+	    	'clientState' => 'required',
+	    	'clientCity' => 'required',
+	    	'inspectionType' => 'required|in:retail,repo,c2c',
 	    	'vehicleCategory' => 'required',
 	    	'registrationType' => 'required',
 	    	'registrationNumber' => 'required',

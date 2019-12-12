@@ -5,14 +5,26 @@ if (!function_exists('findVehicle')) {
     function findVehicle($source)
     {
         switch ($source) {
-            case 'GP':
-                $code = 'gp_user_profile';
+            case '2wheeler':
+                $code = '2WHLR';
                 break;
-            case 'FB':
-                $code = 'fb_user_profile';
+            case '3wheeler':
+                $code = '3WHLR';
+                break;
+            case 'fe':
+                $code = 'FAREQ';
+                break;
+            case 'cv':
+                $code = 'CMVHL';
+                break;
+            case '4wheeler':
+                $code = '4WHLR';
+                break;
+            case 'ce':
+                $code = '4WHLR';
                 break;
             default:
-                $code = 'doc';
+                $code = 'CONEQ';
                 break;
         }
 
