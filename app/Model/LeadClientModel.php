@@ -3,9 +3,9 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ClientModel extends Model {
+class LeadClientModel extends Model {
 
-	protected $fillable = ['id','short_name', 'name', 'city', 'state', 'created_at', 'updated_at'];
+	protected $fillable = ['id', 'lead_id', 'short_name', 'name', 'city', 'state', 'created_at', 'updated_at'];
 	
     public $rules = [
 	    	'name' => 'required',

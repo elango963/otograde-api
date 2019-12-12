@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Validator;
 use Illuminate\Http\Request;
 use App\Model\LeadModel;
-use App\Model\ClientModel;
-use App\Model\CustomerDetailModel;
+use App\Model\LeadClientModel;
+use App\Model\LeadCustomerDetailModel;
 use App\Model\ExecutiveDetailModel;
+use App\Model\ZipcodeListLodel;
 use App\Http\Controllers\Controller;
 
 
@@ -19,19 +20,64 @@ class LeadController extends Controller
         $this->request = app('request');
         $this->user = app('request')->attributes->get('user');
         $this->leadMdl = app()->make(LeadModel::class);
-        $this->clientMdl = app()->make(ClientModel::class);
-        $this->customerMdl = app()->make(CustomerDetailModel::class);
+        $this->leadClientMdl = app()->make(LeadClientModel::class);
+        $this->leadCustomerMdl = app()->make(LeadCustomerDetailModel::class);
         $this->executiveMdl = app()->make(ExecutiveDetailModel::class);
+        $this->vehicleCategoryMdl = app()->make(VehicleCategoryModel::class);
     }
 
-    public function list() {
+    public function create() {
+    	$returnData = [];
+    	// $returnData["clientName"] = $this->leadClientMdl->pluck("name");
+    	// $returnData["vehicleCategory"] = $this->vehicleCategoryMdl->lists("description", "category");
+    	// $this->zipcodeMdl = app()->make(ZipcodeListLodel::class);
+    	// $returnData["zipcode"] = $this->zipcodeMdl->select("pincode", DB::raw('CONCAT(city, state) AS area'), "pincode")->lists("area", "pincode");
+    	$returnData["zipcode"] = [
+    		"636303" => "salem, tamil nadu",
+    		"600100" => "chennai, tamil nadu",
+    		"600010" => "chennai, tamil nadu",
+    		"600017" => "chennai, tamil nadu"
+    	]
+    	$returnData["clientName"] = [
+    		"CHOLAMANDALA",
+    		"HDFC",
+    		"MUTHOOT"
+    	];
+    	$returnData["inspectionType"] = [
+    		"retail" => "Retail",
+    		"repo" => "Repo",
+    		"c2c" => "C2C"
+    	];
+    	$returnData["vehicleCategory"] = [
+    		"2wheeler" => "2 Wheeler",
+    		"3wheeler" => "3 Wheeler",
+    		"4wheeler" => "4 Wheeler"
+    		"fe" => "Farm Equipment"
+    		"cv" => "Commercial Vehicle"
+    		"ce" => "Construction Equipment"
+    	];
+    	$returnData["registrationStatus"] = [
+    		"registered" => "Registered",
+    		"unregistered" => "Un Registered"
+    	];
+    	$returnData["registrationStatus"] = [
+    		"registered" => "Registered",
+    		"unregistered" => "Un Registered"
+    	];
+    	$returnData["ownersCountLimit"] = 10;
+    	$returnData["state"] = config("citylist");
+    	// $leadList = $this->leadMdl->where("status_id", 1)->get();
+
+    	return $this->setStatusCode(200)->respond(["data" => $returnData]);
+    }
+
+    public function inbox() {
     	$leadList = $this->leadMdl->where("status_id", 1)->get();
-    	
+
     	return $this->setStatusCode(200)->respond($leadList);
     }
 
-
-	public function create() {
+	public function save() {
 		$error = $this->validator($this->request, $this->leadMdl->rules);
         if ($error !== false) {
             
@@ -43,7 +89,7 @@ class LeadController extends Controller
         	$clientData['city'] = $data['clientCity'];
         	$clientData['state'] = $data['clientState'];
         	$clientData['short_name'] =  substr($clientData['name'], 0, 5);
-        	$client = $this->clientMdl->create($clientData);
+        	$client = $this->leadClientMdl->create($clientData);
         	/*** Client Details Insert End Here ***/
 
         	/*** Customer Details Insert Start Here ***/
@@ -54,7 +100,7 @@ class LeadController extends Controller
         	$customerData['city'] = $data['customerCity'];
         	$customerData['state'] = $data['customerState'];
         	$customerData['pincode'] = $data['customerZipcode'];
-        	$customer = $this->customerMdl->create($customerData);
+        	$customer = $this->leadCustomerMdl->create($customerData);
         	/*** Customer Details Insert End Here ***/
 
         	/*** Executive Details Insert Start Here ***/
@@ -88,6 +134,12 @@ class LeadController extends Controller
 	    	$newLead->lead_id = $clientData['short_name'].$vehileSource.$newLeadId;
 	    	$newLead->save();
 	    	/*** Lead Id Creation End Here ***/
+	    	
+	    	$client->lead_id = $newLead->lead_id;
+	    	$client->save();
+			
+			$customer->lead_id = $newLead->lead_id;
+			$customer->save();
 
 	    	$data["status"] = "success";
 	    	$data["lead"] = $newLead->first();

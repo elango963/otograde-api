@@ -14,11 +14,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 $router->group(['prefix' => 'api/ajax'], function () use ($router) {
-	$router->post('lead/create', 'LeadController@create');
+	$router->post('lead/save', 'LeadController@save');
 });
 
 $router->group(['prefix' => 'api/lead'], function () use ($router) {
-	$router->get('inbox', 'LeadController@list');
+	$router->get('create', 'LeadController@create');
+	$router->get('inbox', 'LeadController@inbox');
 });
 
 $router->group(['prefix' => 'auth'], function () use ($router) {
