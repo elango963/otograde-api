@@ -8,6 +8,7 @@ use App\Model\LeadModel;
 use App\Model\LeadClientModel;
 use App\Model\LeadCustomerDetailModel;
 use App\Model\ExecutiveDetailModel;
+use App\Model\VehicleCategoryModel;
 use App\Model\ZipcodeListLodel;
 use App\Http\Controllers\Controller;
 
@@ -37,7 +38,7 @@ class LeadController extends Controller
     		"600100" => "chennai, tamil nadu",
     		"600010" => "chennai, tamil nadu",
     		"600017" => "chennai, tamil nadu"
-    	]
+    	];
     	$returnData["clientName"] = [
     		"CHOLAMANDALA",
     		"HDFC",
@@ -51,14 +52,10 @@ class LeadController extends Controller
     	$returnData["vehicleCategory"] = [
     		"2wheeler" => "2 Wheeler",
     		"3wheeler" => "3 Wheeler",
-    		"4wheeler" => "4 Wheeler"
-    		"fe" => "Farm Equipment"
-    		"cv" => "Commercial Vehicle"
+    		"4wheeler" => "4 Wheeler",
+    		"fe" => "Farm Equipment",
+    		"cv" => "Commercial Vehicle",
     		"ce" => "Construction Equipment"
-    	];
-    	$returnData["registrationStatus"] = [
-    		"registered" => "Registered",
-    		"unregistered" => "Un Registered"
     	];
     	$returnData["registrationStatus"] = [
     		"registered" => "Registered",
