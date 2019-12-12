@@ -10,14 +10,13 @@
 | and give it the Closure to call when that URI is requested.
 |
 */
-print_r("hi");
 $router->get('/', function () use ($router) {
-    print_r("hi");
     return $router->app->version();
 });
-
+$router->group(['prefix' => 'api/ajax'], function () use ($router) {
+	$router->post('lead/create', 'LeadController@create');
+});
 
 $router->group(['prefix' => 'auth'], function () use ($router) {
 	 $router->post('/login', 'UserControllers\UserController@userLogin');
-
 });
