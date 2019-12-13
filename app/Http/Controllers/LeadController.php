@@ -121,11 +121,12 @@ class LeadController extends Controller
         	$newLeadData['mfg_date'] = $data['mfgDate'];
         	$newLeadData['reg_date'] = $data['regDate'];
         	$newLeadData['executive_id'] = $executive->id;
-        	$newLead = $this->leadMdl->create([]);
+        	$newLead = $this->leadMdl->create($newLeadData);
+            \Log::info($newLead);
 	    	$vehileSource = findVehicle($data['vehicleCategory']);
 	    	$newLeadId = $newLead->id;
-	    	if (strlen($newId) > 3) {
-	    		$newLeadId = substr('000'.$newId, -3);
+	    	if (strlen($newLeadId) > 3) {
+	    		$newLeadId = substr('000'.$newLeadId, -3);
 	    	}
 
 	    	$newLead->lead_id = $clientData['short_name'].$vehileSource.$newLeadId;
