@@ -3,7 +3,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ZipcodeListLodel extends Model {
+class ZipcodeList extends Model {
 
 	protected $fillable = ['id', 'zipcode', 'city', 'state', 'created_at'];
 }

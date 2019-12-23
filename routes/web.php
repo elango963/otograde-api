@@ -19,6 +19,7 @@ $router->group(['prefix' => 'api/ajax'], function () use ($router) {
 
 $router->group(['prefix' => 'api/lead'], function () use ($router) {
 	$router->get('create', 'LeadController@create');
+	$router->get('edit/{id}', 'LeadController@edit');
 	$router->get('inbox', 'LeadController@inbox');
 });
 

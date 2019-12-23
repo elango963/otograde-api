@@ -3,7 +3,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ExecutiveDetailModel extends Model {
+class ExecutiveDetail extends Model {
 
 	protected $fillable = ['id', 'name', 'mobile', 'created_at', 'updated_at'];
 	

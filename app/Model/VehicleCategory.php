@@ -3,7 +3,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VehicleCategoryModel extends Model {
+class VehicleCategory extends Model {
 
 	 protected $table = 'vehicle_category';
 	 
