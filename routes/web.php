@@ -25,6 +25,7 @@ $router->group(['prefix' => 'api/lead'], function () use ($router) {
 
 $router->group(['prefix' => 'auth'], function () use ($router) {
 	 $router->post('/login', 'UserControllers\UserController@userLogin');
+	 $router->post('/register', 'UserControllers\UserController@userRegister');
 });
 
 $router->group(['prefix' => 'api/ajax/upload'], function () use ($router) {
