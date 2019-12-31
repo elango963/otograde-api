@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReportImage extends Model {
 
-	protected $fillable = ['id', 'report_id', 'file_name', 'slug', 'created_at', 'updated_at'];
+	protected $fillable = ['id', 'report_id', 'originalFileName', 'file_name', 'slug', 'created_at', 'updated_at'];
 	
     public $rules = [
 	    	'file' => 'required|max:1000',
