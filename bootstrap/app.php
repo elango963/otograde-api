@@ -68,9 +68,10 @@ $app->singleton('filesystem', function ($app) {
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'lead' => App\Http\Middleware\LeadMiddleware::class,
+]);
 
 /*
 |--------------------------------------------------------------------------
