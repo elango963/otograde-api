@@ -3,16 +3,16 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReportGeneralInput extends Model {
+class ReportTestDriveInput extends Model {
 
 	protected $guarded = [];
 
-    public function generalInputs()
+    public function testDrives()
     {
         return $this->hasOne('App\Model\Lead', 'lead_id');
     }
 
-    public function generalInput($leadId)
+    public function testDrive($leadId)
     {
         return $this->where('lead_id', $leadId)->first();
     }

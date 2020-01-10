@@ -13,4 +13,9 @@ class ReportImage extends Model {
             "originalFileName" => "required",
             "leadId" => "required"
 	   	];
+
+    public function reportImage($leadId)
+    {
+        return $this->where('lead_id', $leadId)->select('lead_id', 'report_id', 'slug', 'label', 'file_name','file_path')->get();
+    }
 }

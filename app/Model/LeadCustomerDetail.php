@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class LeadCustomerDetail extends Model {
 
-	protected $fillable = ['id', 'lead_id', 'name', 'mobile', 'address1', 'address2', 'city', 'state', 'pincode', 'created_at', 'updated_at'];
+	protected $fillable = ['id', 'lead_id', 'name', 'mobile', 'address1', 'address2', 'city', 'state', 'zipcode', 'created_at', 'updated_at'];
 	
     public $rules = [
 	    	'name' => 'required',
@@ -14,6 +14,6 @@ class LeadCustomerDetail extends Model {
 	    	'address2' => 'required',
 	    	'city' => 'required',
 	    	'state' => 'required',
-	    	'pincode' => 'required'
+	    	'zipcode' => 'required'
 	   	];
 }
