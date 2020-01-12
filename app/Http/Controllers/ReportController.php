@@ -124,7 +124,12 @@ class ReportController extends Controller
             }
             
         }
-        
+        foreach ($this->response["data"]["answers"] as $key => $value) {
+            if (in_array($key, ["reg_date"])) {
+                $this->response["data"]["answers"][$key] = transformDate($value, 'd-m-Y');
+            }
+        }
+
         return $this->setStatusCode(200)->respond($this->response);
     }
 
@@ -223,8 +228,45 @@ class ReportController extends Controller
         $data["lead_status"]["description"] = $lead->LeadStatus->description;
         $data["customer_detail"] = $lead->LeadCustomerDetail->select('name', 'mobile', 'address1', 'address2', 'city', 'state', 'zipcode')->first()->toArray();
         $data["executive_detail"] = $lead->ExecutiveDetail->select('name', 'mobile')->first()->toArray();
+        
+        $data["third_row_seat_condition"] = $data["3rd_row_seat_condition"];
+        $data["grade"] = $this->getGradeDetails($data);
+        $data = $this->resultKeyTransform($data);
         // $this->getValueBasedKey();
         return $this->setStatusCode(200)->respond(["status" => "success", "data" => $data]);
     }
 
+    public function getGradeDetails($data) {
+        $grade = [];
+        $gradeList = file_get_contents(base_path('config/') . "grade.json");
+        $gradeList = json_decode($gradeList, true);
+
+        $returnData = []; 
+        foreach ($gradeList as $key => $value) {
+            $returnData[ucfirst(strtolower($value["label"]))] = "0.0"; 
+            if (empty($value[$data[$key]]) === false) { $value[$data[$key]] =
+                $value[$data[$key]].".0"; $valueArr = explode(".",
+                $value[$data[$key]]); if ($valueArr > 2) { $value[$data[$key]] =
+                $valueArr[0].".".$valueArr[1]; }
+
+                $returnData[ucfirst(strtolower($value["label"]))] = $value[$data[$key]];
+            }
+        }
+
+        return  $returnData;
+    }
+
+    public function resultKeyTransform($data) {
+        foreach ($data as $key => $value) {
+            $data[$key] = $value;
+            if (in_array($key, ["reg_date"])) {
+                $data[$key] = transformDate($value, 'd-m-Y');
+            }
+            if (!is_array($value)) {
+                $data[$key] = strtoupper(str_replace("_", " ", $value));
+            }
+        }
+
+        return  $data;
+    }
 }

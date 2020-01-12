@@ -217,29 +217,6 @@
 				}
 			}
 		},
-		"engine_condition": {
-			"label": "Engine Condition",
-			"class": "",
-			"placeholder": "Select Engine Condition",
-			"type": "select",
-			"options": {
-				"starting": {
-					"label": "Starting"
-				},
-				"not_starting": {
-					"label": "Not Starting"
-				},
-				"not_available": {
-					"label": "Not Available"
-				},
-				"parts_missing": {
-					"label": "Parts Missing"
-				},
-				"engine_missing": {
-					"label": "Engine Missing"
-				}
-			}
-		},
 		"structural_damages": {
 			"label": "Structural Damages",
 			"class": "",
@@ -318,7 +295,7 @@
 				}
 			}
 		},
-		"tyre_conditior": {
+		"tyre_condition": {
 			"label": "Tyre Conditions",
 			"class": "",
 			"placeholder": "Select Tyre Conditions",
@@ -1583,7 +1560,7 @@
 				"acceptable": {
 					"label": "Acceptable"
 				},
-				"Need Attention": {
+				"need_attention": {
 					"label": "Need Attention"
 				},
 				"missing": {
@@ -1630,9 +1607,9 @@
 				"acceptable": {
 					"label": "Acceptable"
 				},
-				"Need Attention": {
-					"label": "Need Attention"
-				},
+				"need_attention": {
+          "label": "Need Attention"
+        },
 				"missing": {
 					"label": "Missing"
 				}
@@ -1677,9 +1654,9 @@
 				"acceptable": {
 					"label": "Acceptable"
 				},
-				"Need Attention": {
-					"label": "Need Attention"
-				},
+				"need_attention": {
+          "label": "Need Attention"
+        },
 				"missing": {
 					"label": "Missing"
 				}
@@ -1724,9 +1701,9 @@
 				"acceptable": {
 					"label": "Acceptable"
 				},
-				"Need Attention": {
-					"label": "Need Attention"
-				},
+				"need_attention": {
+          "label": "Need Attention"
+        },
 				"missing": {
 					"label": "Missing"
 				}
@@ -1772,10 +1749,9 @@
 					"class": "tooGood",
 					"label": "Acceptable"
 				},
-				"Need Attention": {
-					"class": "acceptable",
-					"label": "Need Attention"
-				},
+				"need_attention": {
+          "label": "Need Attention"
+        },
 				"missing": {
 					"class": "tooBad",
 					"label": "Missing"
@@ -2307,9 +2283,18 @@
 				"engine_not_available": {
 					"label": "Engine Not Available"
 				},
-				"parts_missing": {
-					"label": "Parts Missing"
-				}
+        "starting": {
+          "label": "Starting"
+        },
+        "not_starting": {
+          "label": "Not Starting"
+        },
+        "not_available": {
+          "label": "Not Available"
+        },
+        "parts_missing": {
+          "label": "Parts Missing"
+        }
 			}
 		},
 		"engine_running": {

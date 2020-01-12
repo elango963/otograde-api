@@ -40,6 +40,10 @@ class ActionController extends Controller
                 $this->tableRepo = app()->make(ReportTestDriveInput::class);
             }
 
+            if (in_array($request["questionSlug"], ["reg_date"])) {
+                $request["answer"] = transformDate($request["answer"], 'Y-m-d');
+            }
+            // print_r($request["answer"]);exit;
             $response["status"] = "error";
             if (empty($this->tableRepo) === false) {
                 $requestData = [];
